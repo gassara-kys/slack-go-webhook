@@ -24,7 +24,7 @@ type Attachment struct {
 	Title      string   `json:"title"`
 	TitleLink  string   `json:"title_link"`
 	Text       string   `json:"text"`
-	ImageURL   string   `json:"image_url"`
+	ImageUrl   string   `json:"image_url"`
 	Fields     []Field  `json:"fields"`
 	Footer     string   `json:"footer"`
 	FooterIcon string   `json:"footer_icon"`
@@ -36,7 +36,7 @@ type Attachment struct {
 type Payload struct {
 	Parse       string       `json:"parse,omitempty"`
 	Username    string       `json:"username,omitempty"`
-	IconURL     string       `json:"icon_url,omitempty"`
+	IconUrl     string       `json:"icon_url,omitempty"`
 	IconEmoji   string       `json:"icon_emoji,omitempty"`
 	Channel     string       `json:"channel,omitempty"`
 	Text        string       `json:"text,omitempty"`
@@ -52,10 +52,10 @@ func redirectPolicyFunc(req gorequest.Request, via []gorequest.Request) error {
 }
 
 // Send post message via proxy
-func Send(webhookURL string, proxy string, payload Payload) []error {
+func Send(webhookUrl string, proxy string, payload Payload) []error {
 	request := gorequest.New().Proxy(proxy)
 	resp, _, err := request.
-		Post(webhookURL).
+		Post(webhookUrl).
 		RedirectPolicy(redirectPolicyFunc).
 		Send(payload).
 		End()
